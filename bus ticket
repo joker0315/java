@@ -1,0 +1,33 @@
+class Ticket implements Runnable{
+	int BusTicketNum=10; //잔여 좌석
+
+public void run(){
+	for(int i=1;i<=0;i++){
+		try{
+			Thread.sleep(1000); //1초씩 쉬기 
+		}catch(InterruptedException e){
+			e.printStackTrace();
+		}
+		getTicket();
+	}}
+public void getTicket(){
+	BusTicketNum -=1;
+	if(BusTicketNum<=0){
+		System.out.print(Thread.currentThread().getName() + ",");
+		
+		System.out.println("잔여 좌석 없음");
+		return;
+	}
+	System.out.print(Thread.currentThread().getName() + ",");
+	System.out.println("현재 잔여 좌석은 " + BusTicketNum + "좌석");
+}
+}
+public class problem {
+public static void main(String[] args){
+	Ticket a = new Ticket();
+	Thread a1= new Thread(a,"person1");
+	Thread a2= new Thread(a,"person2");
+	a1.start(); //run() 메소드 실행
+	a2.start();
+}
+}
