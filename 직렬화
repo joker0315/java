@@ -1,0 +1,76 @@
+import java.io.*;
+import java.util.*;
+import java.util.Scanner;
+class Person implements Serializable{
+	private int num;
+	private String name;
+	String tell;
+	private String email;
+	public Person(int num, String name, String tell, String email){
+	this.num=num;	this.name=name; this.tell=tell;  this.email=email;
+	}
+	public String toString(){ return  "("+num+"," +name+","+tell+","+email+")";   }
+}//번호, 이름 , 전화번호, 이메일를 필드로 가지는 클래스 생성 
+
+public class problem31 {
+	static final String info="user.txt";// 파일 생성 
+public static void main(String[] args) throws Exception{
+	serial(); deserial();}
+
+public static void serial()
+{try  {  FileOutputStream fos=new FileOutputStream(info);
+		BufferedOutputStream bos=new BufferedOutputStream(fos);
+		ObjectOutputStream out=new ObjectOutputStream(bos);
+		//직렬화
+		Scanner scan = new Scanner(System.in);
+		
+			System.out.print("이름: ");
+			String name = scan.nextLine();
+			
+		    System.out.print("번호: ");
+		    String tell = scan.nextLine();
+		    
+		    System.out.print("이메일: ");
+		    String email = scan.nextLine();
+		
+		    Person p1 = new Person(1,name,tell,email);
+		
+		    System.out.print("이름: ");
+			String name2 = scan.nextLine();
+			
+		    System.out.print("번호: ");
+		    String tell2 = scan.nextLine();
+		    
+		    System.out.print("이메일: ");
+		    String email2 = scan.nextLine();
+		
+		    Person p2 = new Person(2,name2,tell2,email2);
+		    ArrayList list=new ArrayList<>();
+			list.add(p1); list.add(p2);
+
+			out.writeObject(p1); out.writeObject(p2);
+			out.writeObject(list);
+			out.close(); //파일정보 출력 
+			
+	
+}catch(Exception e) {e.printStackTrace();}
+}
+private static void deserial(){
+	try{
+		FileInputStream fis=new FileInputStream(info);
+		BufferedInputStream bis = new BufferedInputStream(fis);
+		ObjectInputStream in=new ObjectInputStream(bis);
+
+		Person p1=(Person)in.readObject();
+		Person p2=(Person)in.readObject();
+		ArrayList list=(ArrayList)in.readObject();// 파일 읽기 
+        System.out.println("번호를 입력하세요");
+       Scanner scan = new Scanner(System.in);
+       int a = scan.nextInt();
+       if(a==1)
+    	   System.out.println(p1.tell);
+       else
+    	   System.out.println(p2.tell);
+		// 번호에 따른 전화번호 출력 
+
+		in.close();
