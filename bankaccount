@@ -1,0 +1,40 @@
+class BankAccount{
+	private int balance;
+	
+	public void deposit(int amount) {	
+		balance += amount;}
+	public void withdraw(int amount) { 
+		balance -= amount;	
+		}		
+
+public int transfer(int amount, BankAccount otherAccount){
+	balance -=amount;
+	otherAccount.balance += amount;
+	return 0;
+}
+void print1(){
+System.out.printf("myAccount1 : 현재 잔액은 %d 입니다.\n", balance);
+
+}
+void print2(){
+System.out.printf("myAccount2 : 현재 잔액은 %d 입니다.\n", balance);
+
+}}
+
+public class BankAccountTest {
+	public static void main(String[] args){
+		BankAccount MyAccount1 = new BankAccount();
+		MyAccount1.deposit(10000);
+		MyAccount1.print1();
+		BankAccount MyAccount2 = new BankAccount();
+		MyAccount2.deposit(0);
+		MyAccount2.print2();
+		System.out.println("transfer(1000)");
+		MyAccount1.transfer(1000, MyAccount2 );
+		MyAccount1.print1();
+		MyAccount2.print2();
+		
+	
+		
+	}
+}
